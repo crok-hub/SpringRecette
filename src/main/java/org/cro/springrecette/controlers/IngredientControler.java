@@ -34,4 +34,11 @@ public class IngredientControler {
 		return ResponseEntity.ok(ingredient);
 	}
 	
+	@GetMapping("/nom/{name}")
+	public ResponseEntity<Collection<Ingredient>> findByName(@PathVariable String name) {
+		Collection<Ingredient> clients = this.service.findByName(name);	
+		if (clients.isEmpty()) return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(clients);
+	}
+	
 }

@@ -3,4 +3,4 @@ spring:
     mongodb:
       host: "localhost"
       port: 2000
-      database: "recette"
+      database: "SpringRecette"
