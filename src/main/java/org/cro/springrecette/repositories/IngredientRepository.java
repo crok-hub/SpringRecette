@@ -12,5 +12,7 @@ public interface IngredientRepository extends MongoRepository<Ingredient, String
 	public Ingredient findById();
 	
 	public List<Ingredient> findByNameAllIgnoreCase(String name);
+	
+	public Ingredient save(Ingredient ingredient);
 
 }

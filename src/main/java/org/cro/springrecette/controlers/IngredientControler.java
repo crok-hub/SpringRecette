@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +38,17 @@ public class IngredientControler {
 	
 	@GetMapping("/nom/{name}")
 	public ResponseEntity<Collection<Ingredient>> findByName(@PathVariable String name) {
-		Collection<Ingredient> clients = this.service.findByName(name);	
-		if (clients.isEmpty()) return ResponseEntity.notFound().build();
-		return ResponseEntity.ok(clients);
+		Collection<Ingredient> ingredients = this.service.findByName(name);
+		if (ingredients.isEmpty()) return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(ingredients);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Ingredient> save(@RequestBody Ingredient ingredient) {
+		Ingredient saved = this.service.save(ingredient);
+		if (saved == null) 
+			return ResponseEntity.unprocessableEntity().build();
+		return ResponseEntity.ok(saved);
 	}
 	
 }
